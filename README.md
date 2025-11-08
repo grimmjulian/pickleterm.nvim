@@ -21,8 +21,7 @@
 
 ```lua
 {
-  "yourname/pickleterm.nvim",
-  opts = {}
+  "grimmjulian/pickleterm.nvim",
 }
 ```
 
@@ -30,7 +29,7 @@
 
 ```lua
 use {
-  "yourname/pickleterm.nvim",
+  "grimmjulian/pickleterm.nvim",
   config = function()
     require("pickleterm").setup()
   end
@@ -45,10 +44,12 @@ use {
 
 ```lua
 require("pickleterm").setup({R = {startcmd = "R"}})
-require("pickleterm").open("R_Terminal", "R")
+require("pickleterm").open("R")
+-- or both steps in one go for setting up a single terminal:
+-- require("pickleterm").open("R", "R")
 ```
 
-- Opens a terminal named `R`  
+- Opens a terminal named `term://R`  
 - If it doesn’t exist, runs the start command `R`
 
 ---
@@ -56,10 +57,10 @@ require("pickleterm").open("R_Terminal", "R")
 ### Send commands to a terminal
 
 ```lua
-require("pickleterm").send_cmd("R_Terminal", "summary(cars)")
+require("pickleterm").send_cmd("R", "summary(cars)")
 ```
 
-- Sends the command to the `R_Terminal` buffer  
+- Sends the command to the `term://R` buffer  
 - Appends a newline automatically (simulating `<Enter>`)
 
 ---
@@ -76,7 +77,7 @@ require("pickleterm").send_cmd("R_Terminal", "summary(cars)")
    ```
 3. Send commands without leaving Neovim:
    ```lua
-   :lua require("pickleterm").send("R_Terminal", "plot(1:10)")
+   :lua require("pickleterm").send_cmd("R_Terminal", "plot(1:10)")
    ```
 
 ---
@@ -86,7 +87,7 @@ require("pickleterm").send_cmd("R_Terminal", "summary(cars)")
 | Function | Description |
 |-----------|--------------|
 | `open(name, start_cmd)` | Open or reuse a terminal by name, optionally running a startup command. |
-| `send(name, cmd)` | Send a command string to a named terminal. |
+| `send_cmd(name, cmd)` | Send a command string to a named terminal. |
 
 ---
 
